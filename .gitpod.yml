@@ -4,24 +4,24 @@ image: gitpod/workspace-full:latest
 # Here we are installing Java 8 and Node.js 14, and setting the default versions.
 # We're also adding the installation directories to the PATH environment variable.
 # You can modify this section to install different versions if desired.
-beforeWorkspaceInit: |
-  sudo apt-get update && \
-  sudo apt-get install -y openjdk-8-jdk && \
-  sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java && \
-  sudo update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/javac && \
-  curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - && \
-  sudo apt-get install -y nodejs && \
-  echo 'export PATH="$HOME/.nodenv/bin:$PATH"' >> ~/.bashrc && \
-  echo 'eval "$(nodenv init -)"' >> ~/.bashrc && \
-  source ~/.bashrc && \
-  nodenv install 14.17.0 && \
-  nodenv global 14.17.0 && \
-  npm install -g yarn
+tasks:
+  - init: |
+      sudo apt-get update && \
+      sudo apt-get install -y openjdk-8-jdk && \
+      sudo update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java && \
+      sudo update-alternatives --set javac /usr/lib/jvm/java-8-openjdk-amd64/bin/javac && \
+      curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - && \
+      sudo apt-get install -y nodejs && \
+      echo 'export PATH="$HOME/.nodenv/bin:$PATH"' >> ~/.bashrc && \
+      echo 'eval "$(nodenv init -)"' >> ~/.bashrc && \
+      source ~/.bashrc && \
+      nodenv install 14.17.0 && \
+      nodenv global 14.17.0 && \
+      npm install -g yarn
 
 # List the commands that should be run when the workspace starts.
 # Here we are just printing the versions of Java and Node.js to the console.
 # You can modify this section to include your own commands.
-tasks:
   - command: java -version
   - command: node -v
   - command: yarn -v
